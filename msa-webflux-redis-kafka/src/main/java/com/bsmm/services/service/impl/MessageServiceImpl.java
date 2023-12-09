@@ -46,10 +46,10 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @KafkaListener(topics = "storage-topic", groupId = "storage-group", containerFactory = "jsonContainerFactory")
-    public Mono<Void> consumeMessage(@Payload StorageMessage message) {
+    public void consumeMessage(@Payload StorageMessage message) {
         log.info("Reading storage message: {}", message);
         var messageDTO = MessageMapper.INSTANCE.toDto(message);
-        return this.create(Mono.just(messageDTO))
-                .then();
+        this.create(Mono.just(messageDTO))
+                .subscribe();
     }
 }
