@@ -1,7 +1,8 @@
 spring:
   application:
     name: Spring-Reactive-Data-Redis
-
+  kafka:
+    bootstrap-servers: localhost:9092
   # Redis DB configuration
   redis:
     host: localhost
